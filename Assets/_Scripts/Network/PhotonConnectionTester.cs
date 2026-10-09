@@ -1,4 +1,5 @@
-// 파일 경로: Assets/_Project/Scripts/Network/PhotonConnectionTester.cs
+// 파일 경로: Assets/_Scripts/Network/PhotonConnectionTester.cs
+
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
