@@ -5,7 +5,7 @@ namespace ProjectD.Player
 {
     /// <summary>
     /// 플레이어의 조준을 처리한다. 전달받은 조준점을 향해 캐릭터를 수평으로 회전시키고, 정밀 조준 상태를 관리한다.
-    /// 입력을 직접 읽지 않으며, 로컬 플레이어는 PlayerInputReader가, 2주차 이후 원격 플레이어는 네트워크 담당이 조준점을 전달한다.
+    /// 입력을 직접 읽지 않으며, 로컬 플레이어는 PlayerInputReader가,원격 플레이어는 네트워크 담당이 조준점을 전달한다.
     /// </summary>
     public class PlayerAimer : MonoBehaviour
     {

@@ -6,7 +6,6 @@ namespace ProjectD.Combat
 {
     /// <summary>
     /// 사격 테스트용 더미 적. 체력이 0이 되면 사라졌다가 일정 시간 뒤 체력을 회복하고 다시 나타난다.
-    /// 1주차 확인용이며, 3주차에 실제 적으로 대체한다.
     /// </summary>
     [RequireComponent(typeof(Health))]
     public class DummyTarget : MonoBehaviour

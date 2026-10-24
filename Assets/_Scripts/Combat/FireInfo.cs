@@ -6,8 +6,7 @@ namespace ProjectD.Combat
 {
     /// <summary>
     /// 투사체 한 발을 만드는 데 필요한 발사 정보.
-    /// 사격은 이 정보만으로 투사체를 만들기 때문에, 2주차에는 이 값을 그대로 RPC로 보내
-    /// 다른 클라이언트에서도 같은 투사체를 재생한다.
+    /// 사격은 이 정보만으로 투사체를 만들기 때문에,이 값을 그대로 RPC로 보내다른 클라이언트에서도 같은 투사체를 재생한다.
     /// </summary>
     public readonly struct FireInfo
     {

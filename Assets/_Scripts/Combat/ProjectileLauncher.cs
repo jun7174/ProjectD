@@ -5,7 +5,7 @@ namespace ProjectD.Combat
 {
     /// <summary>
     /// 발사 정보를 받아 풀에서 투사체를 꺼내 날리고, 명중하면 데미지를 전달한다.
-    /// 2주차에는 다른 클라이언트에서 받은 발사 정보로 시각용 투사체만 날릴 때도 이 컴포넌트를 쓴다.
+    /// 다른 클라이언트에서 받은 발사 정보로 시각용 투사체만 날릴 때도 이 컴포넌트를 쓴다.
     /// 그때는 데미지 판정을 하지 않도록 Deals Damage를 끈다.
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour

@@ -6,7 +6,7 @@ namespace ProjectD.Core.Define
 
     /// <summary>
     /// 탄약 종류. 무기는 자신이 사용하는 탄약 종류를 하나 가진다.
-    /// 4주차 인벤토리에서 탄약 아이템과 연결한다.
+    /// 인벤토리에서 탄약 아이템과 연결한다.
     /// </summary>
     public enum AmmoType
     {

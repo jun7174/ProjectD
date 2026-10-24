@@ -8,7 +8,7 @@ namespace ProjectD.Network
 {
     /// <summary>
     /// Photon 마스터 서버 접속을 확인하기 위한 임시 테스트 컴포넌트.
-    /// 1주차 접속 확인 용도로만 사용하며, 2주차에 정식 네트워크 구조로 교체한다.
+    /// 접속 확인 용도로만 사용
     /// </summary>
     public class PhotonConnectionTester : MonoBehaviourPunCallbacks
     {

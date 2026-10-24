@@ -7,7 +7,7 @@ namespace ProjectD.Player
     /// <summary>
     /// 플레이어의 회피를 처리한다. 스태미나를 소모해 정해진 시간 동안 정해진 거리만큼 이동하고,
     /// 회피 앞부분 일정 시간 동안 무적 상태가 된다.
-    /// 무적 여부는 외부에서 IsInvincible로 조회한다 (3주차 피격자 최종 확인에서 사용).
+    /// 무적 여부는 외부에서 IsInvincible로 조회한다 (피격자 최종 확인에서 사용).
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class PlayerDodger : MonoBehaviour

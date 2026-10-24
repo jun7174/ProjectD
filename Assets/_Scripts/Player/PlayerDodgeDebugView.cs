@@ -6,7 +6,7 @@ namespace ProjectD.Player
 {
     /// <summary>
     /// 회피 상태를 캐릭터 색으로 표시하는 디버그용 컴포넌트.
-    /// 무적 구간과 무적이 아닌 회피 구간을 다른 색으로 보여준다. 1주차 확인용이며 이후 디버그 패널에서 켜고 끈다.
+    /// 무적 구간과 무적이 아닌 회피 구간을 다른 색으로 보여준다.
     /// </summary>
     public class PlayerDodgeDebugView : MonoBehaviour
     {

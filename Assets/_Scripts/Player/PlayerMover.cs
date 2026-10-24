@@ -7,7 +7,7 @@ namespace ProjectD.Player
     /// CharacterController로 플레이어의 걷기, 달리기, 중력을 처리한다.
     /// 입력을 직접 읽지 않고, 외부에서 전달받은 이동 입력과 달리기 요청으로만 움직인다.
     /// 정밀 조준 중에는 감속하고, 회피 중에는 수평 이동을 PlayerDodger에 맡긴다.
-    /// 로컬 플레이어는 PlayerInputReader가, 2주차 이후 원격 플레이어는 네트워크 담당이 값을 전달한다.
+    /// 로컬 플레이어는 PlayerInputReader가,원격 플레이어는 네트워크 담당이 값을 전달한다.
     /// </summary>
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMover : MonoBehaviour

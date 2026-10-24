@@ -7,8 +7,7 @@ namespace ProjectD.Combat
 {
     /// <summary>
     /// 플레이어가 가진 무기 목록과 현재 무기, 무기별 탄창 탄 수를 관리한다.
-    /// 1주차에는 테스트용으로 무기 목록을 순서대로 바꿔 가며 쓴다. 장비 슬롯 규칙은 5주차에 적용한다.
-    /// 예비탄은 임시로 무한이며, 4주차 인벤토리 연동 시 교체한다.
+    /// 예비탄은 임시로 무한
     /// </summary>
     public class PlayerWeaponHolder : MonoBehaviour
     {

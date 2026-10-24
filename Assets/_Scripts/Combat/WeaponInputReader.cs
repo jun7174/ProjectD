@@ -8,7 +8,7 @@ namespace ProjectD.Combat
     /// 로컬 플레이어의 사격, 재장전, 무기 교체 입력을 읽어 전투 담당 컴포넌트에 전달한다.
     /// Player 모듈이 Combat 모듈을 모르게 하려고, 전투 입력은 PlayerInputReader와 분리해서 이 클래스가 읽는다.
     /// 사격 키를 누르는 동안에는 달리기를 막는다.
-    /// 2주차부터 원격 플레이어에서는 이 컴포넌트를 비활성화한다.
+    /// 원격 플레이어에서는 이 컴포넌트를 비활성화한다.
     /// </summary>
     // 같은 프레임의 입력이 동작 처리보다 먼저 전달되도록 기본 스크립트보다 먼저 실행한다
     [DefaultExecutionOrder(-10)]
@@ -106,7 +106,7 @@ namespace ProjectD.Combat
         }
 
         /// <summary>
-        /// 무기 교체 키 입력을 전달한다. 1주차 테스트용으로 1번은 다음 무기, 2번은 이전 무기로 바꾼다.
+        /// 무기 교체 키 입력을 전달한다.테스트용으로 1번은 다음 무기, 2번은 이전 무기로 바꾼다.
         /// </summary>
         private void SendWeaponSwitchInput()
         {
