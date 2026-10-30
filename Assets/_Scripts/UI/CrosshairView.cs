@@ -11,6 +11,7 @@ namespace ProjectD.UI
     /// 조준점은 매 프레임 바뀌는 값을 그리는 UI라 이벤트 대신 읽기 전용 값을 매 프레임 읽는다.
     /// 게임 로직은 이 UI를 모른다. 로컬 플레이어 전용이다.
     /// Screen Space - Overlay 캔버스 아래의 이미지에 붙인다.
+    /// 플레이어가 나중에 생성되는 Raid 씬에서는 씬에서 찾지 않고, LocalPlayerCrosshairBinder가 SetTarget으로 내 캐릭터를 연결한다.
     /// </summary>
     [RequireComponent(typeof(RectTransform))]
     public class CrosshairView : MonoBehaviour
@@ -19,6 +20,9 @@ namespace ProjectD.UI
         [SerializeField] private PlayerAimer _aimer;
         [SerializeField] private PlayerWeaponSpread _weaponSpread;
         [SerializeField] private Camera _camera;
+
+        [Tooltip("켜면 시작할 때 씬에서 플레이어를 찾는다 (Sandbox 씬). 플레이어가 나중에 생성되는 Raid 씬에서는 끈다")]
+        [SerializeField] private bool _findTargetInScene = true;
 
         [Header("표시")]
         [Tooltip("조준점 원의 최소 지름 (캔버스 단위)")]
@@ -39,6 +43,38 @@ namespace ProjectD.UI
             _rectTransform = GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
 
+            if (_camera == null)
+            {
+                _camera = Camera.main;
+            }
+
+            if (_camera == null)
+            {
+                Debug.LogWarning($"[{nameof(CrosshairView)}] 카메라를 찾지 못했습니다. 조준점 크기가 바뀌지 않습니다.", this);
+            }
+
+            if (_findTargetInScene)
+            {
+                FindTargetInScene();
+            }
+        }
+
+        /// <summary>
+        /// 조준점이 읽을 플레이어를 연결한다. Raid 씬에서 내 캐릭터가 생성되면 LocalPlayerCrosshairBinder가 호출한다.
+        /// </summary>
+        /// <param name="aimer">내 캐릭터의 PlayerAimer</param>
+        /// <param name="weaponSpread">내 캐릭터의 PlayerWeaponSpread</param>
+        public void SetTarget(PlayerAimer aimer, PlayerWeaponSpread weaponSpread)
+        {
+            _aimer = aimer;
+            _weaponSpread = weaponSpread;
+        }
+
+        /// <summary>
+        /// 비어 있는 플레이어 참조를 씬에서 찾는다. 플레이어가 하나뿐인 Sandbox 씬에서만 쓴다.
+        /// </summary>
+        private void FindTargetInScene()
+        {
             if (_aimer == null)
             {
                 _aimer = FindFirstObjectByType<PlayerAimer>();
@@ -49,14 +85,9 @@ namespace ProjectD.UI
                 _weaponSpread = FindFirstObjectByType<PlayerWeaponSpread>();
             }
 
-            if (_camera == null)
+            if (_aimer == null)
             {
-                _camera = Camera.main;
-            }
-
-            if (_aimer == null || _camera == null)
-            {
-                Debug.LogWarning($"[{nameof(CrosshairView)}] PlayerAimer 또는 카메라를 찾지 못했습니다. 조준점 크기가 바뀌지 않습니다.", this);
+                Debug.LogWarning($"[{nameof(CrosshairView)}] 씬에서 PlayerAimer를 찾지 못했습니다. 조준점 크기가 바뀌지 않습니다.", this);
             }
         }
 

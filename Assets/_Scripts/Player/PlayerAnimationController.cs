@@ -8,6 +8,7 @@ namespace ProjectD.Player
     /// 플레이어 상태를 보고 지금 재생할 애니메이션 상태 하나를 우선순위로 정해 Animator에 넣는다.
     /// Animator에 값을 쓰는 유일한 컴포넌트이며, 한 번에 하나의 클립만 재생되도록 State 번호 하나로 제어한다.
     /// 이동, 회피, 정밀 조준은 직접 읽고, 사격과 재장전 정보는 Combat 모듈이 SetShooting, SetReloading으로 전달한다.
+    /// 다른 플레이어의 캐릭터처럼 상태를 직접 계산할 수 없는 경우에는 ApplyExternalState로 받은 상태를 그대로 재생한다.
     /// Player 루트에 붙이고, Animator는 자식 모델에서 찾는다.
     /// </summary>
     // 이동, 조준, 회피 계산이 끝난 뒤 같은 프레임 안에 상태를 정하도록 기본 스크립트보다 늦게 실행한다
@@ -35,10 +36,20 @@ namespace ProjectD.Player
         private bool _isShooting;
         private bool _isReloading;
 
+        // 외부에서 받은 상태를 쓰는지 여부와 그 값. 한 번 외부 상태를 받으면 그 뒤로는 직접 계산하지 않는다
+        private bool _hasExternalState;
+        private PlayerAnimState _externalState;
+        private float _externalMoveDirection = 1f;
+
         /// <summary>
-        /// 이번 프레임에 정한 애니메이션 상태. 디버그 확인용이다.
+        /// 이번 프레임에 정한 애니메이션 상태. 네트워크 전송과 디버그 확인에 쓴다.
         /// </summary>
         public PlayerAnimState CurrentState { get; private set; }
+
+        /// <summary>
+        /// 이번 프레임에 정한 이동 클립 재생 방향. 앞 1, 뒤 -1
+        /// </summary>
+        public float CurrentMoveDirection { get; private set; } = 1f;
 
         /// <summary>
         /// 현재 회피 중인지 여부
@@ -100,7 +111,38 @@ namespace ProjectD.Player
         }
 
         /// <summary>
+        /// 외부에서 정한 상태를 그대로 재생하게 한다. 다른 플레이어의 캐릭터처럼 상태를 직접 계산할 수 없을 때 쓴다.
+        /// 한 번 호출하면 이후로는 직접 계산하지 않고 마지막으로 받은 값을 재생한다.
+        /// </summary>
+        /// <param name="state">재생할 상태</param>
+        /// <param name="moveDirection">이동 클립 재생 방향. 앞 1, 뒤 -1</param>
+        public void ApplyExternalState(PlayerAnimState state, float moveDirection)
+        {
+            _hasExternalState = true;
+            _externalState = state;
+            _externalMoveDirection = moveDirection;
+        }
+
+        /// <summary>
+        /// 회피 클립을 처음부터 다시 재생한다.
+        /// 연속으로 회피하면 State 값이 회피로 유지되어 전환이 일어나지 않기 때문에, 이 경우만 상태를 직접 재생한다.
+        /// 내 캐릭터는 회피 시작 이벤트로, 다른 플레이어의 캐릭터는 네트워크로 받은 회피 횟수가 바뀔 때 호출된다.
+        /// </summary>
+        public void PlayDodgeFromStart()
+        {
+            if (_animator == null)
+            {
+                return;
+            }
+
+            CurrentState = PlayerAnimState.Dodge;
+            _animator.SetInteger(AnimatorParams.State, (int)PlayerAnimState.Dodge);
+            _animator.Play(AnimatorStates.Dodge, 0, 0f);
+        }
+
+        /// <summary>
         /// 매 프레임 재생할 상태와 이동 클립 방향을 정해서 Animator에 넣는다.
+        /// 외부 상태를 받은 경우에는 계산하지 않고 받은 값을 넣는다.
         /// </summary>
         private void Update()
         {
@@ -109,9 +151,19 @@ namespace ProjectD.Player
                 return;
             }
 
-            CurrentState = DecideState();
+            if (_hasExternalState)
+            {
+                CurrentState = _externalState;
+                CurrentMoveDirection = _externalMoveDirection;
+            }
+            else
+            {
+                CurrentState = DecideState();
+                CurrentMoveDirection = CalculateMoveDirection();
+            }
+
             _animator.SetInteger(AnimatorParams.State, (int)CurrentState);
-            _animator.SetFloat(AnimatorParams.MoveDirection, CalculateMoveDirection());
+            _animator.SetFloat(AnimatorParams.MoveDirection, CurrentMoveDirection);
         }
 
         /// <summary>
@@ -170,19 +222,11 @@ namespace ProjectD.Player
         }
 
         /// <summary>
-        /// 회피가 시작되면 회피 클립을 처음부터 다시 재생한다.
-        /// 연속으로 회피하면 State 값이 회피로 유지되어 전환이 일어나지 않기 때문에, 이 경우만 상태를 직접 재생한다.
+        /// 내 캐릭터의 회피가 시작되면 회피 클립을 처음부터 다시 재생한다.
         /// </summary>
         private void HandleDodgeStarted()
         {
-            if (_animator == null)
-            {
-                return;
-            }
-
-            CurrentState = PlayerAnimState.Dodge;
-            _animator.SetInteger(AnimatorParams.State, (int)PlayerAnimState.Dodge);
-            _animator.Play(AnimatorStates.Dodge, 0, 0f);
+            PlayDodgeFromStart();
         }
 
         /// <summary>
