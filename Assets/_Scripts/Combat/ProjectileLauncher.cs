@@ -1,12 +1,14 @@
 // 파일 경로: Assets/_Scripts/Combat/ProjectileLauncher.cs
+using System;
 using UnityEngine;
 
 namespace ProjectD.Combat
 {
     /// <summary>
-    /// 발사 정보를 받아 풀에서 투사체를 꺼내 날리고, 명중하면 데미지를 전달한다.
-    /// 다른 클라이언트에서 받은 발사 정보로 시각용 투사체만 날릴 때도 이 컴포넌트를 쓴다.
-    /// 그때는 데미지 판정을 하지 않도록 Deals Damage를 끈다.
+    /// 발사 정보를 받아 풀에서 투사체를 꺼내 날린다.
+    /// Launch는 판정용 발사로, 맞으면 명중 처리(IHitHandler)를 호출한다.
+    /// LaunchVisualOnly는 다른 플레이어가 쏜 탄을 내 화면에 보여 주기만 하는 시각용 발사다 (명중 처리 없음).
+    /// 명중 처리는 기본으로 바로 데미지를 주고(Sandbox), 네트워크 방 안에서는 SetHitHandler로 마스터 보고 방식으로 교체된다.
     /// </summary>
     public class ProjectileLauncher : MonoBehaviour
     {
@@ -16,8 +18,8 @@ namespace ProjectD.Combat
         [Tooltip("투사체가 명중 검사를 할 레이어 (벽, 바닥, 적 등)")]
         [SerializeField] private LayerMask _hitMask;
 
-        [Tooltip("명중 시 데미지를 줄지 여부. 판정 권한이 없는 시각용 발사는 끈다")]
-        [SerializeField] private bool _dealsDamage = true;
+        // 판정용 투사체가 맞았을 때 할 일. 기본은 바로 데미지
+        private IHitHandler _hitHandler = new DirectDamageHitHandler();
 
         /// <summary>
         /// 풀 참조를 확인한다.
@@ -36,10 +38,40 @@ namespace ProjectD.Combat
         }
 
         /// <summary>
-        /// 발사 정보로 투사체 한 발을 날린다.
+        /// 판정용 투사체가 맞았을 때 할 일을 바꾼다. null을 넣으면 기본(바로 데미지)으로 되돌린다.
+        /// 네트워크 방 안에서 PlayerHitReporter가 자신을 넣는다.
+        /// </summary>
+        /// <param name="hitHandler">새 명중 처리</param>
+        public void SetHitHandler(IHitHandler hitHandler)
+        {
+            _hitHandler = hitHandler ?? new DirectDamageHitHandler();
+        }
+
+        /// <summary>
+        /// 판정용 투사체 한 발을 날린다. 맞으면 명중 처리를 호출한다.
         /// </summary>
         /// <param name="fireInfo">발사 정보</param>
         public void Launch(FireInfo fireInfo)
+        {
+            LaunchProjectile(fireInfo, true);
+        }
+
+        /// <summary>
+        /// 시각용 투사체 한 발을 날린다. 벽이나 대상에 닿으면 멈추지만 명중 처리는 하지 않는다.
+        /// 다른 플레이어가 쏜 탄을 내 화면에 보여 줄 때 쓴다.
+        /// </summary>
+        /// <param name="fireInfo">발사 정보</param>
+        public void LaunchVisualOnly(FireInfo fireInfo)
+        {
+            LaunchProjectile(fireInfo, false);
+        }
+
+        /// <summary>
+        /// 풀에서 투사체를 꺼내 날린다.
+        /// </summary>
+        /// <param name="fireInfo">발사 정보</param>
+        /// <param name="handlesHit">맞았을 때 명중 처리를 할지 여부. 시각용이면 false</param>
+        private void LaunchProjectile(FireInfo fireInfo, bool handlesHit)
         {
             if (_projectilePool == null || fireInfo.Weapon == null)
             {
@@ -52,24 +84,19 @@ namespace ProjectD.Combat
                 return;
             }
 
-            projectile.Launch(fireInfo, _hitMask, _dealsDamage ? HandleHit : null, _projectilePool.Release);
+            // 시각용이면 명중 콜백을 넘기지 않아, 투사체가 닿아도 멈추기만 한다
+            Action<Projectile, RaycastHit> onHit = handlesHit ? HandleHit : (Action<Projectile, RaycastHit>)null;
+            projectile.Launch(fireInfo, _hitMask, onHit, _projectilePool.Release);
         }
 
         /// <summary>
-        /// 투사체가 맞은 대상이 데미지를 받을 수 있으면 무기 데미지를 전달한다.
+        /// 판정용 투사체가 맞으면 현재 명중 처리에 넘긴다.
         /// </summary>
         /// <param name="projectile">명중한 투사체</param>
         /// <param name="hit">명중 정보</param>
         private void HandleHit(Projectile projectile, RaycastHit hit)
         {
-            // 콜라이더가 자식에 붙어 있는 경우도 있어 부모 방향으로 찾는다
-            IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
-            if (damageable == null)
-            {
-                return;
-            }
-
-            damageable.TakeDamage(projectile.FireInfo.Weapon.Damage, hit.point);
+            _hitHandler.HandleHit(projectile.FireInfo, hit);
         }
     }
 }

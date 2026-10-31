@@ -7,7 +7,7 @@ using UnityEngine;
 namespace ProjectD.Network
 {
     /// <summary>
-    /// 플레이어 애니메이션 상태를 네트워크로 동기화한다 (Week2 D2 B안).
+    /// 플레이어 애니메이션 상태를 네트워크로 동기화한다
     /// 내 캐릭터는 PlayerAnimationController가 정한 State 번호, 이동 클립 방향, 회피 횟수를 보내고,
     /// 남의 캐릭터는 받은 값을 PlayerAnimationController에 그대로 적용한다. Animator에 값을 쓰는 곳은 여전히 PlayerAnimationController 하나다.
     /// 회피 횟수는 연속 회피처럼 State가 회피로 유지되는 동안에도 회피 클립을 처음부터 다시 재생하기 위해 보낸다.

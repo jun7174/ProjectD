@@ -78,6 +78,8 @@ GameObject:
   - component: {fileID: 5698099724603914399}
   - component: {fileID: 5117242852797312794}
   - component: {fileID: 7879773441215976095}
+  - component: {fileID: 6300183488756159763}
+  - component: {fileID: 6803538483007444507}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -313,7 +315,6 @@ MonoBehaviour:
   _hitMask:
     serializedVersion: 2
     m_Bits: 1153
-  _dealsDamage: 1
 --- !u!114 &4751607130868901463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,6 +503,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerAnimationSync
   _animationController: {fileID: 0}
   _dodger: {fileID: 0}
+--- !u!114 &6300183488756159763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dd5c3ceff780fd45abb3c722fe268b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerFireSync
+  _weaponDatabase: {fileID: 11400000, guid: 18102e5693a630846a4741ad3ea27b9b, type: 2}
+  _shooter: {fileID: 0}
+  _launcher: {fileID: 0}
+--- !u!114 &6803538483007444507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f3480c8ae4052449e9c382ac5e0def, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerHitReporter
+  _weaponDatabase: {fileID: 11400000, guid: 18102e5693a630846a4741ad3ea27b9b, type: 2}
+  _rangeTolerance: 2
+  _launcher: {fileID: 0}
+  _weaponHolder: {fileID: 0}
 --- !u!1 &7895952325932156754
 GameObject:
   m_ObjectHideFlags: 0

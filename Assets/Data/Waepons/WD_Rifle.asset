@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3246e6cb9ca83043a8dc579a18d5005, type: 3}
   m_Name: WD_Rifle
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Data.WeaponData
+  _weaponId: 1002
   _weaponName: "\uC18C\uCD1D"
   _ammoType: 1
   _damage: 15

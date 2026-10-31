@@ -11,7 +11,7 @@ namespace ProjectD.Network
     /// <summary>
     /// Raid 씬에서 방 상태를 지켜본다. 참가자 목록 변화를 알리고, 레이드 나가기와 방장 이탈 시 세션 종료를 처리한다.
     /// 방을 나가면 온라인은 Lobby 씬, 혼자 플레이는 Boot 씬으로 돌아간다.
-    /// 2주차 임시 처리이며, 레이드 무효 처리와 출격 상태 저장은 6주차에 붙인다.
+    /// 임시 처리이며, 레이드 무효 처리와 출격 상태 저장은 추후에 붙인다.
     /// </summary>
     /// <remarks>
     /// ProjectD.Player 네임스페이스와 이름이 겹치므로 Photon의 플레이어 클래스는 Photon.Realtime.Player로 전체 이름을 쓴다.
@@ -133,7 +133,7 @@ namespace ProjectD.Network
         }
 
         /// <summary>
-        /// 서버 접속이 끊기면 Boot 씬으로 돌아간다. 끊김을 사망으로 처리하는 규칙은 5주차에 붙인다.
+        /// 서버 접속이 끊기면 Boot 씬으로 돌아간다. 끊김을 사망으로 처리하는 규칙은 추후에 붙인다.
         /// </summary>
         /// <param name="cause">끊긴 원인</param>
         public override void OnDisconnected(DisconnectCause cause)

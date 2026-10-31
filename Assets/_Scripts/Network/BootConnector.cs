@@ -161,7 +161,7 @@ namespace ProjectD.Network
         /// <param name="cause">끊긴 원인</param>
         public override void OnDisconnected(DisconnectCause cause)
         {
-            if (_soloPlayStarter != null && _soloPlayStarter.IsStarting)
+            if (PhotonNetwork.OfflineMode || (_soloPlayStarter != null && _soloPlayStarter.IsStarting))
             {
                 return;
             }

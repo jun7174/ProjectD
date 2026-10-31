@@ -9,7 +9,7 @@ namespace ProjectD.UI
 {
     /// <summary>
     /// Raid 씬의 임시 방 정보 화면. 방 이름, 참가자 목록, 나가기 버튼을 보여 준다.
-    /// 중도 참가와 나가기를 확인하기 위한 테스트용 화면이며, 정식 HUD와 메뉴는 7주차에 만든다.
+    /// 중도 참가와 나가기를 확인하기 위한 테스트용 화면이며, 정식 HUD와 메뉴는 추후에 만든다.
     /// </summary>
     public class RaidSessionView : MonoBehaviour
     {

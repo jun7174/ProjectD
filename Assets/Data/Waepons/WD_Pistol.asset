@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3246e6cb9ca83043a8dc579a18d5005, type: 3}
   m_Name: WD_Pistol
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Data.WeaponData
+  _weaponId: 1001
   _weaponName: "\uAD8C\uCD1D"
   _ammoType: 0
   _damage: 20

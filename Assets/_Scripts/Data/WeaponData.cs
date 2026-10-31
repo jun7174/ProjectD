@@ -13,6 +13,9 @@ namespace ProjectD.Data
     public class WeaponData : ScriptableObject
     {
         [Header("기본 정보")]
+        [Tooltip("무기 고유 ID. 네트워크 전송과 저장에 쓴다. 무기는 1000번대를 쓰고 서로 겹치면 안 된다")]
+        [SerializeField] private int _weaponId;
+
         [Tooltip("화면에 표시할 무기 이름")]
         [SerializeField] private string _weaponName = "새 무기";
 
@@ -91,7 +94,10 @@ namespace ProjectD.Data
         /// 화면에 표시할 무기 이름
         /// </summary>
         public string WeaponName => _weaponName;
-
+        /// <summary>
+        /// 무기 고유 ID. 네트워크 전송과 저장에 쓴다
+        /// </summary>
+        public int WeaponId => _weaponId;
         /// <summary>
         /// 사용하는 탄약 종류
         /// </summary>

@@ -37,7 +37,7 @@ namespace ProjectD.Network
                 IsVisible = true,
                 // 레이드 중에도 방을 열어 두어 중도 참가를 허용한다 (GameDesign 9번)
                 IsOpen = true,
-                // 5주차 재참가 제한에서 나간 플레이어를 UserId로 구분하기 위해 공개한다
+                // 추후 재참가 제한에서 나간 플레이어를 UserId로 구분하기 위해 공개한다
                 PublishUserId = true,
                 CustomRoomProperties = properties,
                 // 로비의 방 목록에서도 표시 이름을 읽을 수 있도록 로비에 공개할 속성을 지정한다

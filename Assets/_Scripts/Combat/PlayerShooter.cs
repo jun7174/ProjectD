@@ -1,5 +1,6 @@
 // 파일 경로: Assets/_Scripts/Combat/PlayerShooter.cs
 using System;
+using System.Collections.Generic;
 using ProjectD.Data;
 using ProjectD.Player;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace ProjectD.Combat
     /// 사격을 처리한다. 방아쇠 입력, 발사 간격, 연사 여부, 탄 소모를 확인하고,
     /// 탄퍼짐을 적용한 발사 정보를 만들어 ProjectileLauncher에 넘긴다.
     /// 회피 중이나 재장전 중에는 쏠 수 없고, 탄창이 비었을 때 쏘려고 하면 자동으로 재장전한다.
+    /// 한 번 쏠 때마다 그 발사의 발사 정보 목록을 OnShotFired로 알려, 네트워크 전송 같은 처리가 네트워크를 모르는 이 클래스 밖에서 이루어지게 한다.
     /// </summary>
     public class PlayerShooter : MonoBehaviour
     {
@@ -29,11 +31,27 @@ namespace ProjectD.Combat
         private bool _wasTriggerHeld;
         private float _nextFireTime;
 
+        // 한 번 쏠 때 만든 발사 정보 목록. 발사마다 새로 만들지 않고 비워서 다시 쓴다
+        private readonly List<FireInfo> _shotFireInfos = new List<FireInfo>();
+
         /// <summary>
         /// 한 번 발사했을 때 호출된다. 산탄총처럼 여러 발이 나가도 한 번만 호출된다.
         /// 화면 흔들림, 사운드 등 발사 연출이 구독한다.
         /// </summary>
         public event Action<WeaponData> OnFired;
+
+        /// <summary>
+        /// 한 번 발사했을 때 그 발사로 나간 모든 투사체의 발사 정보 목록과 함께 호출된다.
+        /// 산탄총은 목록에 여러 개가 들어 있다. 목록은 다음 발사 때 다시 쓰므로 구독하는 쪽은 즉시 읽고 보관하지 않는다.
+        /// 네트워크로 발사를 전달하는 PlayerFireSync가 구독한다.
+        /// </summary>
+        public event Action<IReadOnlyList<FireInfo>> OnShotFired;
+
+        /// <summary>
+        /// 투사체가 나가는 위치. Muzzle이 비어 있으면 캐릭터 위치를 쓴다.
+        /// 다른 플레이어가 쏜 탄을 이 캐릭터의 총구에서 보여 줄 때 쓴다.
+        /// </summary>
+        public Vector3 MuzzlePosition => _muzzle != null ? _muzzle.position : transform.position;
 
         /// <summary>
         /// 참조를 찾고 비어 있으면 경고한다.
@@ -110,6 +128,7 @@ namespace ProjectD.Combat
             }
 
             OnFired?.Invoke(weapon);
+            OnShotFired?.Invoke(_shotFireInfos);
         }
 
         /// <summary>
@@ -137,17 +156,20 @@ namespace ProjectD.Combat
         }
 
         /// <summary>
-        /// 무기의 한 발당 투사체 수만큼 탄퍼짐을 적용한 발사 정보를 만들어 발사한다.
+        /// 무기의 한 발당 투사체 수만큼 탄퍼짐을 적용한 발사 정보를 만들어 발사하고, 발사 정보 목록에 모은다.
         /// </summary>
         /// <param name="weapon">현재 무기</param>
         private void FirePellets(WeaponData weapon)
         {
             float spreadAngle = _weaponSpread != null ? _weaponSpread.CurrentSpreadAngle : 0f;
+            _shotFireInfos.Clear();
 
             for (int i = 0; i < weapon.PelletsPerShot; i++)
             {
                 Vector3 direction = ApplySpread(_aimer.AimDirection, spreadAngle);
-                _launcher.Launch(new FireInfo(_muzzle.position, direction, weapon));
+                FireInfo fireInfo = new FireInfo(_muzzle.position, direction, weapon);
+                _launcher.Launch(fireInfo);
+                _shotFireInfos.Add(fireInfo);
             }
         }
 
