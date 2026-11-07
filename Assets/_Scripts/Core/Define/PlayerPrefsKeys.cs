@@ -3,7 +3,7 @@ namespace ProjectD.Core.Define
 {
     /// <summary>
     /// PlayerPrefs 저장 키 모음. 키 문자열은 이 파일에만 둔다.
-    /// 게임 진행 저장(창고, 출격 상태)은 추후에 로컬 JSON으로 따로 만들고, 여기에는 간단한 설정 값만 둔다.
+    /// 게임 진행 저장(창고, 출격 상태)은 추후에 로컬 JSON
     /// </summary>
     public static class PlayerPrefsKeys
     {

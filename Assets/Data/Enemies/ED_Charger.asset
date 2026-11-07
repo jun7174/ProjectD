@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b1641be52575248a513dc8ea282654, type: 3}
+  m_Name: ED_Charger
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Data.EnemyData
+  _enemyId: 2001
+  _displayName: "\uB3CC\uACA9\uD615"
+  _resourcePrefabName: Enemy_Charger
+  _maxHealth: 100
+  _patrolSpeed: 2
+  _chaseSpeed: 4.5
+  _sightDistance: 15
+  _sightAngle: 100
+  _alertGainPerSecond: 0.5
+  _alertDecayPerSecond: 0.2
+  _attackRange: 4
+  _telegraphDuration: 0.5
+  _attackDamage: 15
+  _attackType: 0
+  _chargeDistance: 6
+  _chargeSpeed: 14
+  _chargeRecoverSeconds: 0.8
+  _projectileWeapon: {fileID: 0}
+  _burstCount: 3
+  _burstInterval: 0.15
+  _burstCooldownSeconds: 1.2
+  _retreatDistance: 5
+  _returnAfterLostSeconds: 5

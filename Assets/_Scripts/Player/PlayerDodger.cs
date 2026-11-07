@@ -54,6 +54,11 @@ namespace ProjectD.Player
         public bool IsInvincible => IsDodging && _elapsedTime < _invincibleDuration;
 
         /// <summary>
+        /// 가장 최근 회피의 무적이 끝나는(또는 끝난) 시각 (Time.time 기준). 회피한 적이 없으면 음의 무한대
+        /// </summary>
+        public float InvincibleEndTime { get; private set; } = float.NegativeInfinity;
+
+        /// <summary>
         /// 필요한 컴포넌트를 캐싱하고 필수 참조를 확인한다.
         /// </summary>
         private void Awake()
@@ -99,7 +104,7 @@ namespace ProjectD.Player
             _dodgeDirection = CalculateDodgeDirection(moveInput);
             _elapsedTime = 0f;
             IsDodging = true;
-
+            InvincibleEndTime = Time.time + _invincibleDuration;
             // 회피 방향을 바라보게 한다. 회피가 끝나면 PlayerAimer가 다시 조준 방향으로 돌린다
             transform.rotation = Quaternion.LookRotation(_dodgeDirection);
 

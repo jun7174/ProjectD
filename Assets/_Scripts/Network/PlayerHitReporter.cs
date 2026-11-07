@@ -1,5 +1,6 @@
 // 파일 경로: Assets/_Scripts/Network/PlayerHitReporter.cs
 using Photon.Pun;
+using ProjectD.AI;
 using ProjectD.Combat;
 using ProjectD.Data;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine;
 namespace ProjectD.Network
 {
     /// <summary>
-    /// 네트워크 방 안에서 플레이어 탄의 명중을 처리한다 
+    /// 네트워크 방 안에서 플레이어 탄의 명중을 처리한다
     /// 쏜 사람 화면: 판정용 탄이 네트워크 대상(NetworkHealth)에 맞으면 마스터에게 보고한다. 데미지는 직접 주지 않는다.
     /// 마스터 화면: 받은 보고를 검증하고, 통과하면 대상의 NetworkHealth로 데미지를 모두에게 적용한다.
     /// 방 안에서만 ProjectileLauncher의 명중 처리를 자신으로 바꾸므로, 방 밖(Sandbox)에서는 기존처럼 바로 데미지가 들어간다.
@@ -30,6 +31,9 @@ namespace ProjectD.Network
         [Tooltip("디버그 보고에 쓸 현재 무기를 읽는다")]
         [SerializeField] private PlayerWeaponHolder _weaponHolder;
 
+        [Tooltip("이 캐릭터를 적의 추적 대상으로 나타내는 컴포넌트. 맞은 적이 공격자를 추적할 때 쓴다")]
+        [SerializeField] private EnemyTarget _selfTarget;
+
         /// <summary>
         /// 참조를 찾고, 방 안이면 ProjectileLauncher의 명중 처리를 이 컴포넌트로 바꾼다.
         /// </summary>
@@ -43,6 +47,11 @@ namespace ProjectD.Network
             if (_weaponHolder == null)
             {
                 _weaponHolder = GetComponent<PlayerWeaponHolder>();
+            }
+
+            if (_selfTarget == null && !TryGetComponent(out _selfTarget))
+            {
+                Debug.LogWarning($"[{nameof(PlayerHitReporter)}] EnemyTarget을 찾지 못했습니다. 맞은 적이 공격자를 추적하지 않습니다.", this);
             }
 
             if (_weaponDatabase == null || _launcher == null)
@@ -149,6 +158,20 @@ namespace ProjectD.Network
             }
 
             target.ApplyDamageAsMaster(weapon.Damage, hitPoint);
+            NotifyAttacked(target);
+        }
+
+        /// <summary>
+        /// 맞은 대상이 적이면 공격자(이 캐릭터)를 알려 바로 추적하게 한다
+        /// 적 AI는 마스터에서만 돌고 이 함수도 마스터의 검증 흐름에서만 호출되므로, 별도 전송이 필요 없다.
+        /// </summary>
+        /// <param name="target">맞은 대상</param>
+        private void NotifyAttacked(NetworkHealth target)
+        {
+            if (_selfTarget != null && target.TryGetComponent(out EnemyPerception perception))
+            {
+                perception.ReactToAttack(_selfTarget);
+            }
         }
 
         /// <summary>

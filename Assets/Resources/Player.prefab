@@ -80,6 +80,15 @@ GameObject:
   - component: {fileID: 7879773441215976095}
   - component: {fileID: 6300183488756159763}
   - component: {fileID: 6803538483007444507}
+  - component: {fileID: -6259568012882824734}
+  - component: {fileID: 878651990073640615}
+  - component: {fileID: 6651747476569073546}
+  - component: {fileID: -4056092687058419148}
+  - component: {fileID: 1795479173581757657}
+  - component: {fileID: 4860566205414836910}
+  - component: {fileID: 4369602034296658298}
+  - component: {fileID: 2593555798861427439}
+  - component: {fileID: 3643206353894524613}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -151,6 +160,7 @@ MonoBehaviour:
   - {fileID: 3877169088290160475}
   - {fileID: 4656201038441646239}
   - {fileID: 6899023208663474307}
+  - {fileID: -6259568012882824734}
   _networkOnlyBehaviours:
   - {fileID: 5117242852797312794}
 --- !u!114 &9027271506206247919
@@ -312,6 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Combat.ProjectileLauncher
   _projectilePool: {fileID: 0}
+  _poolType: 0
   _hitMask:
     serializedVersion: 2
     m_Bits: 1153
@@ -534,6 +545,156 @@ MonoBehaviour:
   _rangeTolerance: 2
   _launcher: {fileID: 0}
   _weaponHolder: {fileID: 0}
+  _selfTarget: {fileID: 0}
+--- !u!114 &-6259568012882824734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14e0e98584e33746bde79e3f64ac6a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.World.OccluderProbe
+  _checkInterval: 0.1
+  _camera: {fileID: 0}
+  _bodyHeight: 1.2
+  _castRadius: 0.4
+  _wallMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  _roofCheckStartHeight: 1.5
+  _roofCheckDistance: 10
+  _roofMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  _revealDelay: 0.2
+--- !u!114 &878651990073640615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c574f98e11e962e4591aeec6c2bac353, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.AI.EnemyTarget
+  _aimHeight: 1.2
+--- !u!114 &6651747476569073546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7077c40351156c458f5881b509eaec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerNoiseEmitter
+  _walkNoiseRadius: 2
+  _runNoiseRadius: 10
+  _dodgeNoiseRadius: 8
+  _shotNoiseRadius: 20
+  _movementNoiseInterval: 0.3
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _animationController: {fileID: 0}
+  _fireSync: {fileID: 0}
+--- !u!114 &-4056092687058419148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21be48e0dec0aae4ab79222a2eeef2f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Combat.Health
+  _maxHealth: 100
+--- !u!114 &1795479173581757657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a110dddd96240ba4687ee826c6d3abe8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.NetworkHealth
+--- !u!114 &4860566205414836910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2511a720666cba449543ec87513d8f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerDamageReceiver
+  _invincibleTolerance: 0.1
+  _logDodgedHits: 1
+  _health: {fileID: 0}
+  _networkHealth: {fileID: 0}
+  _dodger: {fileID: 0}
+--- !u!114 &4369602034296658298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca61f9d73318fd4589cecc7b40743cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerTemporaryDeath
+  _reviveDelay: 3
+  _health: {fileID: 0}
+  _enemyTarget: {fileID: 0}
+--- !u!114 &2593555798861427439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566bee5d000dd1a48b2bf714c78a3a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.UI.DamageNumberSpawner
+  _health: {fileID: 0}
+  _damageNumberPrefab: {fileID: 8394925329244134364, guid: c224a5977655e7640ac7772ae407d338, type: 3}
+  _heightOffset: 0.5
+  _randomHorizontalOffset: 0.3
+--- !u!114 &3643206353894524613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13df176a72d19704ba45897845471767, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Combat.DamageFlash
+  _health: {fileID: 0}
+  _targetRenderer: {fileID: 7594828932685405317}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashDuration: 0.08
 --- !u!1 &7895952325932156754
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 // 파일 경로: Assets/_Scripts/Combat/ProjectilePool.cs
 using UnityEngine;
 using UnityEngine.Pool;
+using ProjectD.Core.Define;
 
 namespace ProjectD.Combat
 {
@@ -21,9 +22,13 @@ namespace ProjectD.Combat
         [Tooltip("풀에 보관할 최대 개수. 넘치는 투사체는 반환될 때 삭제된다")]
         [Min(1)]
         [SerializeField] private int _maxSize = 256;
-
+        [Tooltip("풀 종류. 발사 담당(ProjectileLauncher)이 같은 종류의 풀을 찾는다")]
+        [SerializeField] private ProjectilePoolType _poolType = ProjectilePoolType.Player;
         private ObjectPool<Projectile> _pool;
-
+        /// <summary>
+        /// 풀 종류
+        /// </summary>
+        public ProjectilePoolType PoolType => _poolType;
         /// <summary>
         /// 프리팹을 확인하고 풀을 만든다.
         /// </summary>

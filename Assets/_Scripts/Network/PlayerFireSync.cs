@@ -1,4 +1,5 @@
 // 파일 경로: Assets/_Scripts/Network/PlayerFireSync.cs
+using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using ProjectD.Combat;
@@ -23,6 +24,12 @@ namespace ProjectD.Network
         [Header("참조 (비워 두면 같은 오브젝트에서 찾는다)")]
         [SerializeField] private PlayerShooter _shooter;
         [SerializeField] private ProjectileLauncher _launcher;
+
+        /// <summary>
+        /// 이 캐릭터가 쏜 것이 확인될 때마다 발생한다. 내 캐릭터가 직접 쐈을 때와 다른 클라이언트의 발사를 받았을 때 모두 발생한다.
+        /// 마스터의 소음 발생(PlayerNoiseEmitter)이 구독해서 적에게 사격 소음을 알린다.
+        /// </summary>
+        public event Action OnShotObserved;
 
         /// <summary>
         /// 참조를 찾고 비어 있으면 경고한다.
@@ -79,7 +86,15 @@ namespace ProjectD.Network
         /// <param name="shotFireInfos">이번 발사로 나간 투사체들의 발사 정보</param>
         private void HandleShotFired(IReadOnlyList<FireInfo> shotFireInfos)
         {
-            if (!PhotonNetwork.InRoom || !photonView.IsMine || shotFireInfos.Count == 0)
+            if (shotFireInfos.Count == 0)
+            {
+                return;
+            }
+
+            // 방 밖(Sandbox)에서도 소음은 나야 하므로 전송 여부와 관계없이 먼저 알린다
+            OnShotObserved?.Invoke();
+
+            if (!PhotonNetwork.InRoom || !photonView.IsMine)
             {
                 return;
             }
@@ -130,6 +145,8 @@ namespace ProjectD.Network
             {
                 _launcher.LaunchVisualOnly(new FireInfo(origin, direction, weapon));
             }
+
+            OnShotObserved?.Invoke();
         }
     }
 }
