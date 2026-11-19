@@ -8,11 +8,11 @@ namespace ProjectD.Combat
     /// 체력을 관리하고 데미지를 받는다. 체력이 0이 되면 사망 이벤트를 보낸다.
     /// 피격 연출, 데미지 숫자, 사망 처리는 이 컴포넌트의 이벤트를 구독해서 각자 처리한다.
     /// 네트워크에서는 마스터가 정한 데미지를 모든 클라이언트가 같은 순서로 TakeDamage에 넣어 체력을 맞추고,
-    /// 중도 참가자는 SetCurrentHealth로 현재 체력을 한 번에 맞춘다.
+    /// 중도 참가자는 SetMaxHealth와 SetCurrentHealth로 현재 값을 한 번에 맞춘다.
     /// </summary>
     public class Health : MonoBehaviour, IDamageable
     {
-        [Tooltip("최대 체력")]
+        [Tooltip("최대 체력. 적은 실행 중에 EnemyData와 인원 배율로 다시 정해진다")]
         [Min(1f)]
         [SerializeField] private float _maxHealth = 100f;
 
@@ -89,7 +89,19 @@ namespace ProjectD.Combat
         }
 
         /// <summary>
-        /// 체력을 최대로 되돌린다. 더미 적 재등장 등에 사용한다.
+        /// 최대 체력을 바꾼다. 남은 체력 비율은 유지한다 (절반 남았으면 바뀐 최대 체력의 절반).
+        /// 인원이 바뀌어 적 체력 배율이 달라질 때 쓴다. 죽어 있으면 0을 유지한다.
+        /// </summary>
+        /// <param name="maxHealth">새 최대 체력. 1보다 작으면 1로 맞춘다</param>
+        public void SetMaxHealth(float maxHealth)
+        {
+            float ratio = _currentHealth / _maxHealth;
+            _maxHealth = Mathf.Max(1f, maxHealth);
+            _currentHealth = _maxHealth * ratio;
+        }
+
+        /// <summary>
+        /// 체력을 최대로 되돌린다. 더미 적 재등장, 플레이어 임시 회복에 쓴다.
         /// </summary>
         public void ResetHealth()
         {

@@ -29,6 +29,9 @@ GameObject:
   - component: {fileID: 4250319828229455170}
   - component: {fileID: -5888440886024384276}
   - component: {fileID: -4802986126356591918}
+  - component: {fileID: -7544419713894948032}
+  - component: {fileID: 2212332108290559712}
+  - component: {fileID: 1811774500338919295}
   m_Layer: 7
   m_Name: Enemy_Charger
   m_TagString: Untagged
@@ -224,6 +227,7 @@ MonoBehaviour:
   - {fileID: -946222716491301286}
   - {fileID: -6590953147511440220}
   - {fileID: 1790099508630814988}
+  - {fileID: 2212332108290559712}
   _networkOnlyBehaviours:
   - {fileID: 3052288298804639569}
 --- !u!114 &4632955879157144052
@@ -270,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a110dddd96240ba4687ee826c6d3abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.NetworkHealth
+  _health: {fileID: 0}
 --- !u!114 &8229245398426813069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,6 +429,68 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: 2e5cc87d614df3d4f905b8aadff68052, type: 2}
   _weapon: {fileID: 0}
   _launcher: {fileID: 0}
+--- !u!114 &-7544419713894948032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07cf65207899a924fa766b9e33479934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.EnemyHealthScaler
+  _data: {fileID: 11400000, guid: 2e5cc87d614df3d4f905b8aadff68052, type: 2}
+  _balanceSettings: {fileID: 11400000, guid: e99d588da90167141bf3b85f47c6994c, type: 2}
+  _logScaling: 1
+  _health: {fileID: 0}
+  _networkHealth: {fileID: 0}
+--- !u!114 &2212332108290559712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51513d24029c3324daf83b8a34bffcf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.EnemyDormancy
+  _wakeDistance: 25
+  _sleepDistance: 30
+  _checkInterval: 0.5
+  _joinSyncSeconds: 0.3
+  _brain: {fileID: 0}
+  _perception: {fileID: 0}
+  _movement: {fileID: 0}
+  _status: {fileID: 0}
+  _health: {fileID: 0}
+--- !u!114 &1811774500338919295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a6dc3c68e318f6459d035ad51711b91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.EnemyDeath
+  _behavioursToDisable:
+  - {fileID: -6590953147511440220}
+  - {fileID: -946222716491301286}
+  - {fileID: 2212332108290559712}
+  - {fileID: 4388679303739023359}
+  - {fileID: 3052288298804639569}
+  - {fileID: -5888440886024384276}
+  _collidersToDisable: []
+  _corpseTiltAngle: 90
+  _corpseHeightDrop: 0.5
+  _health: {fileID: 0}
+  _status: {fileID: 0}
 --- !u!1 &6607764581812769379
 GameObject:
   m_ObjectHideFlags: 0
