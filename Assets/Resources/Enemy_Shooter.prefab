@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &403263054049983641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6692832425173717367}
+  - component: {fileID: 2333391299002435013}
+  m_Layer: 12
+  m_Name: LootTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6692832425173717367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403263054049983641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2774667912202227247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2333391299002435013
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403263054049983641}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2946456018285830048
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +86,11 @@ GameObject:
   - component: {fileID: 4609885168165808431}
   - component: {fileID: 3447141924605777688}
   - component: {fileID: -2925017730071074710}
+  - component: {fileID: 5637621218708725467}
+  - component: {fileID: -3280475013710825009}
+  - component: {fileID: -5989702653207071056}
+  - component: {fileID: 2820143863903796069}
+  - component: {fileID: -6479181130141497442}
   m_Layer: 7
   m_Name: Enemy_Shooter
   m_TagString: Untagged
@@ -55,6 +113,7 @@ Transform:
   m_Children:
   - {fileID: 6875553659121570878}
   - {fileID: 1865618960495299330}
+  - {fileID: 6692832425173717367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6627138596739258289
@@ -510,6 +569,80 @@ MonoBehaviour:
   _corpseHeightDrop: 0.5
   _health: {fileID: 0}
   _status: {fileID: 0}
+--- !u!114 &5637621218708725467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6f233e42b98354398015ca77fb5e17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Inventory.LootContainer
+  _displayName: "\uC0AC\uC218\uD615 \uC2DC\uCCB4"
+--- !u!114 &-3280475013710825009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c8e865a83627442ab66407f068ddce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Inventory.LootContainerInteractable
+  _priority: 1
+  _holdDuration: 1
+  _container: {fileID: 0}
+--- !u!114 &-5989702653207071056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daffe3ca8f7250c4b925516285afe746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.LootContainerSync
+  _startingLootTable: {fileID: 0}
+  _maxTakeDistance: 4
+  _container: {fileID: 0}
+--- !u!114 &2820143863903796069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc4ea9b28fadc624b81adb43c64db0e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Core.InteractionHighlight
+  _highlightObject: {fileID: 0}
+  _renderers: []
+  _highlightColor: {r: 1, g: 0.85, b: 0.3, a: 1}
+--- !u!114 &-6479181130141497442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946456018285830048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f54c22507a2ae5419cfb48e4bba9b7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.EnemyCorpseLoot
+  _data: {fileID: 11400000, guid: 8f8a7548a5f5ce2469b0cb6bc0bf50ac, type: 2}
+  _lootTrigger: {fileID: 403263054049983641}
+  _health: {fileID: 0}
+  _containerSync: {fileID: 0}
 --- !u!1 &3470481540324627667
 GameObject:
   m_ObjectHideFlags: 0

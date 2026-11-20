@@ -18,7 +18,7 @@ namespace ProjectD.Network
     {
         [Header("데이터")]
         [Tooltip("모든 무기 데이터 목록. 보고받은 무기 ID로 데미지와 사거리를 찾는다")]
-        [SerializeField] private WeaponDatabase _weaponDatabase;
+        [SerializeField] private ItemDatabase _weaponDatabase;
 
         [Header("마스터 검증")]
         [Tooltip("사거리 검사 여유값 (m). 위치 동기화 지연 때문에 실제보다 조금 멀게 보일 수 있어 무기 최대 사거리에 더한다")]
@@ -85,7 +85,7 @@ namespace ProjectD.Network
                 return;
             }
 
-            SendHitReport(target, fireInfo.Weapon.WeaponId, hit.point);
+            SendHitReport(target, fireInfo.Weapon.ItemId, hit.point);
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace ProjectD.Network
                 return;
             }
 
-            SendHitReport(target, weapon.WeaponId, target.transform.position);
+            SendHitReport(target, weapon.ItemId, target.transform.position);
             Debug.Log($"[{nameof(PlayerHitReporter)}] 디버그 명중 보고를 보냈습니다. 대상까지 거리 {Vector3.Distance(transform.position, target.transform.position):F1}m, 무기 사거리 {weapon.MaxRange:F1}m", this);
         }
     }

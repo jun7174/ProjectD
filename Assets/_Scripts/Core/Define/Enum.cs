@@ -125,4 +125,73 @@ namespace ProjectD.Core.Define
         /// <summary>적 탄</summary>
         Enemy
     }
+
+    /// <summary>
+    /// 아이템 분류. 인벤토리 아이콘 색과 장비 슬롯 규칙에 쓴다.
+    /// </summary>
+    public enum ItemCategory
+    {
+        /// <summary>무기</summary>
+        Weapon,
+
+        /// <summary>탄약</summary>
+        Ammo,
+
+        /// <summary>방어구</summary>
+        Armor,
+
+        /// <summary>가방</summary>
+        Bag,
+
+        /// <summary>소모품 (체력, 스태미나 회복)</summary>
+        Consumable,
+
+        /// <summary>판매용 잡동사니</summary>
+        Junk,
+
+        /// <summary>교환 재화</summary>
+        Currency,
+
+        /// <summary>열쇠</summary>
+        Key
+    }
+
+    /// <summary>
+    /// 아이템 희귀도 3단계.
+    /// </summary>
+    public enum ItemRarity
+    {
+        /// <summary>일반</summary>
+        Common,
+
+        /// <summary>고급</summary>
+        Uncommon,
+
+        /// <summary>희귀</summary>
+        Rare
+    }
+
+    /// <summary>
+    /// 소모품을 쓰면 무엇이 회복되는지.
+    /// </summary>
+    public enum ConsumableEffect
+    {
+        /// <summary>체력 회복</summary>
+        Health,
+
+        /// <summary>스태미나 회복</summary>
+        Stamina
+    }
+
+    /// <summary>
+    /// 게임 입력을 막는 이유. 이유마다 막는 입력이 다르다.
+    /// </summary>
+    public enum InputBlockReason
+    {
+        /// <summary>인벤토리를 연 동안. 사격과 조준을 막고 이동은 허용한다</summary>
+        Inventory,
+
+        /// <summary>채팅 입력 중. 모든 게임 입력을 막는다</summary>
+        Chat
+    }
 }

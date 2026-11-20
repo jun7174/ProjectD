@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3c933fe4ce4414a9e2b338cc12ea09, type: 3}
+  m_Name: ItemIconPalette
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.UI.ItemIconPalette
+  _weapon: {r: 0.55, g: 0.55, b: 0.6, a: 1}
+  _ammo: {r: 0.85, g: 0.7, b: 0.25, a: 1}
+  _armor: {r: 0.3, g: 0.45, b: 0.7, a: 1}
+  _bag: {r: 0.45, g: 0.35, b: 0.25, a: 1}
+  _consumable: {r: 0.35, g: 0.7, b: 0.4, a: 1}
+  _junk: {r: 0.5, g: 0.45, b: 0.4, a: 1}
+  _currency: {r: 0.7, g: 0.4, b: 0.75, a: 1}
+  _key: {r: 0.9, g: 0.85, b: 0.4, a: 1}

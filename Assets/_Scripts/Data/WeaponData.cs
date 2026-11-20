@@ -5,20 +5,14 @@ using UnityEngine;
 namespace ProjectD.Data
 {
     /// <summary>
-    /// 무기 하나의 수치를 정의하는 데이터.
+    /// 무기 하나의 수치를 정의하는 데이터. 아이템 공통 데이터(ID, 이름, 그리드 크기 등)는 ItemData에 있다.
     /// 무기를 추가할 때는 코드를 고치지 않고 이 에셋만 새로 만든다.
     /// 탄퍼짐 각도는 모두 조준 방향에서 한쪽으로 최대 몇 도까지 벗어나는지를 뜻한다.
     /// </summary>
     [CreateAssetMenu(fileName = "WeaponData", menuName = "ProjectD/Weapon Data")]
-    public class WeaponData : ScriptableObject
+    public class WeaponData : ItemData
     {
-        [Header("기본 정보")]
-        [Tooltip("무기 고유 ID. 네트워크 전송과 저장에 쓴다. 무기는 1000번대를 쓰고 서로 겹치면 안 된다")]
-        [SerializeField] private int _weaponId;
-
-        [Tooltip("화면에 표시할 무기 이름")]
-        [SerializeField] private string _weaponName = "새 무기";
-
+        [Header("무기")]
         [Tooltip("사용하는 탄약 종류")]
         [SerializeField] private AmmoType _ammoType = AmmoType.Rifle;
 
@@ -90,14 +84,6 @@ namespace ProjectD.Data
         [Min(0f)]
         [SerializeField] private float _shakeForce = 0.15f;
 
-        /// <summary>
-        /// 화면에 표시할 무기 이름
-        /// </summary>
-        public string WeaponName => _weaponName;
-        /// <summary>
-        /// 무기 고유 ID. 네트워크 전송과 저장에 쓴다
-        /// </summary>
-        public int WeaponId => _weaponId;
         /// <summary>
         /// 사용하는 탄약 종류
         /// </summary>
@@ -184,10 +170,12 @@ namespace ProjectD.Data
         public float ShakeForce => _shakeForce;
 
         /// <summary>
-        /// 인스펙터 값이 바뀌면 최대 탄퍼짐이 기본 탄퍼짐보다 작아지지 않도록 맞춘다.
+        /// 공통 검사 후 분류를 무기로 고정하고, 최대 탄퍼짐이 기본 탄퍼짐보다 작아지지 않도록 맞춘다.
         /// </summary>
-        private void OnValidate()
+        protected override void OnValidate()
         {
+            base.OnValidate();
+            SetCategory(ItemCategory.Weapon);
             _maxSpread = Mathf.Max(_maxSpread, _baseSpread);
         }
     }

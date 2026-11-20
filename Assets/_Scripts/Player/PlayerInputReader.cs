@@ -18,6 +18,10 @@ namespace ProjectD.Player
         [SerializeField] private PlayerAimer _aimer;
         [SerializeField] private PlayerDodger _dodger;
 
+        // 19번째 줄 _dodger 필드 아래에 추가
+        [Tooltip("인벤토리를 연 동안 조준을 멈추기 위해 확인한다. 비워 두면 같은 오브젝트에서 찾는다")]
+        [SerializeField] private PlayerInputGate _inputGate;
+
         [Header("조준")]
         [Tooltip("마우스 위치를 월드로 투영할 카메라. 비워 두면 Main Camera를 사용한다")]
         [SerializeField] private Camera _camera;
@@ -108,7 +112,11 @@ namespace ProjectD.Player
             {
                 return;
             }
-
+            if (_inputGate != null && _inputGate.IsAimBlocked)
+            {
+                _aimer.SetPreciseAimRequested(false);
+                return;
+            }
             _aimer.SetPreciseAimRequested(_controls.Player.AimPrecise.IsPressed());
 
             if (TryGetMouseAimPoint(out Vector3 aimPoint))
@@ -180,6 +188,11 @@ namespace ProjectD.Player
             if (_dodger == null)
             {
                 _dodger = GetComponent<PlayerDodger>();
+            }
+
+            if (_inputGate == null)
+            {
+                TryGetComponent(out _inputGate);
             }
 
             if (_camera == null)

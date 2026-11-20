@@ -19,7 +19,7 @@ namespace ProjectD.Network
     {
         [Header("데이터")]
         [Tooltip("모든 무기 데이터 목록. 받은 무기 ID로 무기를 찾을 때 쓴다")]
-        [SerializeField] private WeaponDatabase _weaponDatabase;
+        [SerializeField] private ItemDatabase _weaponDatabase;
 
         [Header("참조 (비워 두면 같은 오브젝트에서 찾는다)")]
         [SerializeField] private PlayerShooter _shooter;
@@ -99,7 +99,7 @@ namespace ProjectD.Network
                 return;
             }
 
-            int weaponId = shotFireInfos[0].Weapon.WeaponId;
+            int weaponId = shotFireInfos[0].Weapon.ItemId;
             Vector3[] directions = new Vector3[shotFireInfos.Count];
 
             for (int i = 0; i < shotFireInfos.Count; i++)

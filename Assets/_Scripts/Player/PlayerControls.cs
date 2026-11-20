@@ -255,6 +255,24 @@ namespace ProjectD.Player
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Chat"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9d0a86a-769f-4493-aedb-8d769e598229"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""1bbc97da-e593-4d5b-aa60-d9a6248732c9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -499,6 +517,28 @@ namespace ProjectD.Player
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f0ec6f4-fd9f-4f31-be0d-65210e52afca"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Chat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ca0028f-c2fc-4818-961e-19ebc9cdc8c7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -525,6 +565,8 @@ namespace ProjectD.Player
             m_Player_Quick3 = m_Player.FindAction("Quick3", throwIfNotFound: true);
             m_Player_SelfKill = m_Player.FindAction("SelfKill", throwIfNotFound: true);
             m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+            m_Player_Chat = m_Player.FindAction("Chat", throwIfNotFound: true);
+            m_Player_RotateItem = m_Player.FindAction("RotateItem", throwIfNotFound: true);
         }
 
         ~@PlayerControls()
@@ -623,6 +665,8 @@ namespace ProjectD.Player
         private readonly InputAction m_Player_Quick3;
         private readonly InputAction m_Player_SelfKill;
         private readonly InputAction m_Player_Pause;
+        private readonly InputAction m_Player_Chat;
+        private readonly InputAction m_Player_RotateItem;
         /// <summary>
         /// Provides access to input actions defined in input action map "Player".
         /// </summary>
@@ -707,6 +751,14 @@ namespace ProjectD.Player
             /// </summary>
             public InputAction @Pause => m_Wrapper.m_Player_Pause;
             /// <summary>
+            /// Provides access to the underlying input action "Player/Chat".
+            /// </summary>
+            public InputAction @Chat => m_Wrapper.m_Player_Chat;
+            /// <summary>
+            /// Provides access to the underlying input action "Player/RotateItem".
+            /// </summary>
+            public InputAction @RotateItem => m_Wrapper.m_Player_RotateItem;
+            /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
             public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -786,6 +838,12 @@ namespace ProjectD.Player
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Chat.started += instance.OnChat;
+                @Chat.performed += instance.OnChat;
+                @Chat.canceled += instance.OnChat;
+                @RotateItem.started += instance.OnRotateItem;
+                @RotateItem.performed += instance.OnRotateItem;
+                @RotateItem.canceled += instance.OnRotateItem;
             }
 
             /// <summary>
@@ -851,6 +909,12 @@ namespace ProjectD.Player
                 @Pause.started -= instance.OnPause;
                 @Pause.performed -= instance.OnPause;
                 @Pause.canceled -= instance.OnPause;
+                @Chat.started -= instance.OnChat;
+                @Chat.performed -= instance.OnChat;
+                @Chat.canceled -= instance.OnChat;
+                @RotateItem.started -= instance.OnRotateItem;
+                @RotateItem.performed -= instance.OnRotateItem;
+                @RotateItem.canceled -= instance.OnRotateItem;
             }
 
             /// <summary>
@@ -1017,6 +1081,20 @@ namespace ProjectD.Player
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnPause(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Chat" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnChat(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RotateItem" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRotateItem(InputAction.CallbackContext context);
         }
     }
 }

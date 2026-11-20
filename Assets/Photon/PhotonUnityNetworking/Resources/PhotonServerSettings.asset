@@ -46,6 +46,16 @@ MonoBehaviour:
   - RpcRevive
   - RpcPlaceCorpse
   - RpcSetMaxHealth
+  - RpcGrantResult
+  - RpcPickupResult
+  - RpcReceiveMessage
+  - RpcRemoveEntry
+  - RpcRequestDrop
+  - RpcRequestGrant
+  - RpcRequestPickup
+  - RpcRequestTake
+  - RpcSetContents
+  - RpcTakeResult
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

@@ -107,6 +107,10 @@ namespace ProjectD.Data
         [Min(0f)]
         [SerializeField] private float _returnAfterLostSeconds = 5f;
 
+        [Header("루팅")]
+        [Tooltip("죽은 뒤 시체에서 나오는 아이템을 정하는 루팅 테이블. 비워 두면 시체가 비어 있다")]
+        [SerializeField] private LootTable _lootTable;
+
         /// <summary>적 종류 고유 ID (2000번대)</summary>
         public int EnemyId => _enemyId;
 
@@ -175,5 +179,8 @@ namespace ProjectD.Data
 
         /// <summary>타겟을 놓친 뒤 복귀까지 걸리는 시간</summary>
         public float ReturnAfterLostSeconds => _returnAfterLostSeconds;
+
+        /// <summary>시체 루팅 테이블. 없으면 null</summary>
+        public LootTable LootTable => _lootTable;
     }
 }

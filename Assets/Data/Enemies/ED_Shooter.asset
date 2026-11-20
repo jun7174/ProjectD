@@ -35,3 +35,4 @@ MonoBehaviour:
   _burstCooldownSeconds: 1.2
   _retreatDistance: 5
   _returnAfterLostSeconds: 5
+  _lootTable: {fileID: 11400000, guid: 544fca03add0dc346a3645a2fd89d66f, type: 2}

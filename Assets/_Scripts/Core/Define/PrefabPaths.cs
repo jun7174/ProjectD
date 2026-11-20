@@ -10,5 +10,10 @@ namespace ProjectD.Core.Define
         /// 플레이어 캐릭터 프리팹 (Assets/Resources/Player.prefab)
         /// </summary>
         public const string Player = "Player";
+
+        /// <summary>
+        /// 땅에 떨어진 아이템 프리팹 (Assets/Resources/WorldItem.prefab)
+        /// </summary>
+        public const string WorldItem = "WorldItem";
     }
 }

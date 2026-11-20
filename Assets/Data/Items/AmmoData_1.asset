@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3697460c3a824542b7ca8bdfd4cad96, type: 3}
+  m_Name: AmmoData_1
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Data.AmmoData
+  _itemId: 3002
+  _displayName: "\uC18C\uCD1D\uD0C4"
+  _category: 1
+  _rarity: 0
+  _gridSize: {x: 1, y: 1}
+  _maxStack: 60
+  _icon: {fileID: 0}
+  _worldPrefab: {fileID: 0}
+  _sellPrice: 0
+  _ammoType: 1

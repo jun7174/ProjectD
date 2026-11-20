@@ -191,6 +191,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 1538424406092866312, guid: bef9ab987768733459961f3b8ad81d16, type: 3}
   _defaultCapacity: 64
   _maxSize: 256
+  _poolType: 0
 --- !u!4 &231476447
 Transform:
   m_ObjectHideFlags: 0

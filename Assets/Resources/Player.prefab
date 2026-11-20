@@ -89,6 +89,12 @@ GameObject:
   - component: {fileID: 4369602034296658298}
   - component: {fileID: 2593555798861427439}
   - component: {fileID: 3643206353894524613}
+  - component: {fileID: 4036929824416254753}
+  - component: {fileID: 2999926135045868746}
+  - component: {fileID: 2951958951269847740}
+  - component: {fileID: 5303654008390981943}
+  - component: {fileID: 7877520025914496756}
+  - component: {fileID: 8032657104700524770}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -161,6 +167,11 @@ MonoBehaviour:
   - {fileID: 4656201038441646239}
   - {fileID: 6899023208663474307}
   - {fileID: -6259568012882824734}
+  - {fileID: 4036929824416254753}
+  - {fileID: 2999926135045868746}
+  - {fileID: 2951958951269847740}
+  - {fileID: 5303654008390981943}
+  - {fileID: 7877520025914496756}
   _networkOnlyBehaviours:
   - {fileID: 5117242852797312794}
 --- !u!114 &9027271506206247919
@@ -178,6 +189,7 @@ MonoBehaviour:
   _mover: {fileID: 0}
   _aimer: {fileID: 0}
   _dodger: {fileID: 0}
+  _inputGate: {fileID: 0}
   _camera: {fileID: 0}
   _aimPlaneHeightOffset: 1
 --- !u!114 &2728732468268157684
@@ -526,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dd5c3ceff780fd45abb3c722fe268b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerFireSync
-  _weaponDatabase: {fileID: 11400000, guid: 18102e5693a630846a4741ad3ea27b9b, type: 2}
+  _weaponDatabase: {fileID: 11400000, guid: 7b998a660883b6f499248752e768424f, type: 2}
   _shooter: {fileID: 0}
   _launcher: {fileID: 0}
 --- !u!114 &6803538483007444507
@@ -541,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f3480c8ae4052449e9c382ac5e0def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerHitReporter
-  _weaponDatabase: {fileID: 11400000, guid: 18102e5693a630846a4741ad3ea27b9b, type: 2}
+  _weaponDatabase: {fileID: 11400000, guid: 7b998a660883b6f499248752e768424f, type: 2}
   _rangeTolerance: 2
   _launcher: {fileID: 0}
   _weaponHolder: {fileID: 0}
@@ -631,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a110dddd96240ba4687ee826c6d3abe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.NetworkHealth
+  _health: {fileID: 0}
 --- !u!114 &4860566205414836910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,6 +708,102 @@ MonoBehaviour:
   _targetRenderer: {fileID: 7594828932685405317}
   _flashColor: {r: 1, g: 1, b: 1, a: 1}
   _flashDuration: 0.08
+--- !u!114 &4036929824416254753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d9c2f7f756ab14e8db454b46045380, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Inventory.PlayerInventory
+  _gridSize: {x: 4, y: 4}
+--- !u!114 &2999926135045868746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58db338ebcd82de49aec603c5005e375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Inventory.PlayerLootSession
+  _maxDistance: 3
+  _checkInterval: 0.2
+--- !u!114 &2951958951269847740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7060d2deda787c54b92c8443faae74f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Player.PlayerInteractor
+  _radius: 2
+  _scanInterval: 0.1
+  _interactableMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  _dodger: {fileID: 0}
+--- !u!114 &5303654008390981943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dcca3a9591897243a4f099b7e6afab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Player.InteractionInputReader
+  _interactor: {fileID: 0}
+--- !u!114 &7877520025914496756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f409749bebb4ff429734659f107ab7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Player.PlayerInputGate
+  _disabledWhileInventoryOpen:
+  - {fileID: 963057190320446869}
+  _disabledWhileChatting:
+  - {fileID: 9027271506206247919}
+  - {fileID: 963057190320446869}
+  - {fileID: 5303654008390981943}
+--- !u!114 &8032657104700524770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722977724547196086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d634f2f2ef7dd14f83acbdaa4565ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Network.PlayerItemTransfer
+  _itemDatabase: {fileID: 11400000, guid: 7b998a660883b6f499248752e768424f, type: 2}
+  _dropDistance: 1
+  _debugGrantItems:
+  - {fileID: 11400000, guid: db75087b572351e40a9763de485ee573, type: 2}
+  - {fileID: 11400000, guid: 0fffd463b7a79704d87d72e5d908c49a, type: 2}
+  - {fileID: 11400000, guid: 0480b2027beec3c4ea0b3edb90f65a29, type: 2}
+  - {fileID: 11400000, guid: 81c7d381fd8a7dd4cb5a7c336c16cd23, type: 2}
+  _inventory: {fileID: 0}
 --- !u!1 &7895952325932156754
 GameObject:
   m_ObjectHideFlags: 0
