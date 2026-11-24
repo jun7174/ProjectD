@@ -16,7 +16,7 @@ MonoBehaviour:
   _displayName: "\uC7A1\uB3D9\uC0AC\uB2C8_0"
   _category: 5
   _rarity: 0
-  _gridSize: {x: 1, y: 1}
+  _gridSize: {x: 2, y: 1}
   _maxStack: 5
   _icon: {fileID: 0}
   _worldPrefab: {fileID: 0}

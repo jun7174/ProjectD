@@ -13,37 +13,21 @@ MonoBehaviour:
   m_Name: LT_Box_Common
   m_EditorClassIdentifier: Assembly-CSharp::ProjectD.Data.LootTable
   _entries:
-  - _item: {fileID: 11400000, guid: db75087b572351e40a9763de485ee573, type: 2}
-    _weight: 4
-    _minCount: 10
-    _maxCount: 20
-  - _item: {fileID: 11400000, guid: e473b4856bb748241bd03b2444940fe6, type: 2}
-    _weight: 3
-    _minCount: 10
-    _maxCount: 20
-  - _item: {fileID: 11400000, guid: 7101a61d63ffa674587c6f865d8714ae, type: 2}
-    _weight: 3
-    _minCount: 4
-    _maxCount: 8
   - _item: {fileID: 11400000, guid: 0480b2027beec3c4ea0b3edb90f65a29, type: 2}
-    _weight: 2
+    _weight: 4
     _minCount: 1
-    _maxCount: 3
+    _maxCount: 2
   - _item: {fileID: 11400000, guid: e75e1b612eb9f3c489efde5411a32a27, type: 2}
-    _weight: 2
+    _weight: 4
     _minCount: 1
-    _maxCount: 3
+    _maxCount: 4
   - _item: {fileID: 11400000, guid: 6dc2afdc36e6d8841a84b98137be1be1, type: 2}
-    _weight: 2
+    _weight: 4
     _minCount: 1
-    _maxCount: 3
-  - _item: {fileID: 11400000, guid: e47d9c966533f6d468732ff6408eef56, type: 2}
-    _weight: 1
+    _maxCount: 2
+  - _item: {fileID: 11400000, guid: 81c7d381fd8a7dd4cb5a7c336c16cd23, type: 2}
+    _weight: 4
     _minCount: 1
-    _maxCount: 1
-  - _item: {fileID: 11400000, guid: 0fffd463b7a79704d87d72e5d908c49a, type: 2}
-    _weight: 1
-    _minCount: 1
-    _maxCount: 1
+    _maxCount: 2
   _minRolls: 1
   _maxRolls: 3
