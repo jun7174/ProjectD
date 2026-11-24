@@ -236,4 +236,4 @@ flowchart TD
 
 ---
 
-**연락처**: 이형준 · 이메일 입력 · GitHub [jun7174](https://github.com/jun7174)
+**연락처**: 이형준 · jun7174@naver.com · GitHub [jun7174](https://github.com/jun7174)
