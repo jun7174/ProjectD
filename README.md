@@ -221,7 +221,7 @@ flowchart TD
 
 ## 6. 실행과 조작
 
-- 맵 에셋(Synty POLYGON Construction Pack)은 유료라 저장소에 포함하지 않았습니다. 저장소만 받으면 Raid 씬의 맵이 비어 보이며, 빌드는 8주차에 공개할 예정입니다
+- 맵 에셋(Synty POLYGON Construction Pack)은 유료라 저장소에 포함하지 않았습니다. 저장소만 받으면 Raid 씬의 맵이 비어 보이며, 빌드는 Releases에서 받을 수 있습니다.
 - 2인 테스트: 에디터 두 개(ParrelSync) 또는 빌드 두 개를 실행해 한쪽이 방을 만들고 다른 쪽이 목록에서 참가
 
 | 키 | 동작 |
